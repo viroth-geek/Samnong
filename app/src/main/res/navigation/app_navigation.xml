@@ -7,18 +7,18 @@
 
     <fragment
         android:id="@+id/firstFragment"
-        android:name="com.samnong.app.fragment.FirstFragment"
+        android:name="com.samnong.app.view.home.HomeFragment"
         android:label="fragment_first"
-        tools:layout="@layout/fragment_first" />
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/secondFragment"
-        android:name="com.samnong.app.fragment.SecondFragment"
+        android:name="com.samnong.app.view.favourite.FavouriteFragment"
         android:label="fragment_second"
-        tools:layout="@layout/fragment_second" />
+        tools:layout="@layout/fragment_favourite" />
     <fragment
         android:id="@+id/thirdFragment"
-        android:name="com.samnong.app.fragment.ThirdFragment"
+        android:name="com.samnong.app.view.order.OrderedFragment"
         android:label="fragment_third"
-        tools:layout="@layout/fragment_third" />
+        tools:layout="@layout/fragment_order" />
 </navigation>

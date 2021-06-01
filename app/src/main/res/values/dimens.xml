@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="app_margin">12dp</dimen>
+    <dimen name="drawer_icon">32dp</dimen>
+    <dimen name="value_20">20dp</dimen>
+    <dimen name="profile_icon_image_size">64dp</dimen>
+</resources>

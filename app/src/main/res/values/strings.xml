@@ -1,13 +1,15 @@
 <resources>
     <string name="app_name">ទីផ្សារសំណង់</string>
     <string name="favourite">ព័ត៌មានដែលខ្ញុំចូលចិត្ត</string>
-    <string name="contact">ទំនាក់ទំនងដើម្បីផ្សាយពាណិជ្ជកម្ម</string>
-    <string name="about">អំពី​ KPT</string>
-    <string name="share">ចែករំលែកកម្មវិធីនេះ</string>
     <string name="search">ស្វែងរក</string>
     <string name="setting">ការកំណត់</string>
     <string name="gender_setting">ការកំណត់ទូទៅ</string>
     <string name="open">open</string>
     <string name="close">close</string>
     <string name="profile">profile</string>
+    <string name="detail">ព័ត៌មានលម្អិត</string>
+    <string name="order_history">ប្រវត្តិដែលបានបញ្ជាទិញ</string>
+    <string name="messages">សារ</string>
+    <string name="message">ព័ត៌មានសារ</string>
+    <string name="home">ទំព័រដើម</string>
 </resources>

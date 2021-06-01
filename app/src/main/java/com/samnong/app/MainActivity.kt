@@ -2,14 +2,17 @@ package com.samnong.app
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.plusAssign
 import androidx.navigation.ui.setupWithNavController
 import com.samnong.app.databinding.ActivityMainBinding
+import com.samnong.app.utils.KeepStateNavigator
 
-class MainActivity : AppActivity() {
+class MainActivity : SamnongActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -38,7 +41,11 @@ class MainActivity : AppActivity() {
                 binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             }
         }
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
 

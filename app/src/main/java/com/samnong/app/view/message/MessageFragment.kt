@@ -1,4 +1,4 @@
-package com.samnong.app.fragment
+package com.samnong.app.view.message
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,28 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.samnong.app.R
 
-class SecondFragment : Fragment() {
+class MessageFragment : Fragment() {
 
     companion object {
-        fun newInstance() = SecondFragment()
+        fun newInstance() = MessageFragment()
     }
 
-    private lateinit var viewModel: SecondViewModel
+    private lateinit var viewModel: MessageViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-//        statusBar.light(true).color(requireContext().getColor(R.color.white))
-    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        return inflater.inflate(R.layout.fragment_message, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(SecondViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(MessageViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

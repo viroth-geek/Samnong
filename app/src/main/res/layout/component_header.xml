@@ -1,20 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    android:layout_centerVertical="true"
+    android:layout_marginStart="@dimen/value_20"
+    android:layout_marginTop="@dimen/app_margin"
+    android:layout_marginEnd="@dimen/app_margin"
+    android:fitsSystemWindows="true"
     android:orientation="vertical">
 
     <ImageView
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:layout_gravity="center"
+        android:id="@+id/profileImageView"
+        android:layout_width="@dimen/profile_icon_image_size"
+        android:layout_height="@dimen/profile_icon_image_size"
         android:contentDescription="@string/profile"
+        android:layout_marginEnd="@dimen/app_margin"
+        android:background="@drawable/circle_shape"
+        android:scaleType="centerCrop"
         tools:src="@tools:sample/avatars" />
 
+
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/nameTextView"
         style="@style/Style.App.MainTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:src="@tools:sample/first_names" />
-</LinearLayout>
+        android:layout_toEndOf="@id/profileImageView"
+        android:textColor="@color/black"
+        tools:text="@tools:sample/full_names" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/detailTextView"
+        style="@style/Style.App.LinkText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameTextView"
+        android:layout_marginBottom="28dp"
+        android:layout_toEndOf="@id/profileImageView"
+        android:clickable="true"
+        android:focusable="true"
+        android:text="@string/detail" />
+
+    <include
+        layout="@layout/component_border_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@id/detailTextView" />
+
+</RelativeLayout>

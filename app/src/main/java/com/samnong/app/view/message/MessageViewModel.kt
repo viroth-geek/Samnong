@@ -1,7 +1,7 @@
-package com.samnong.app.fragment
+package com.samnong.app.view.message
 
 import androidx.lifecycle.ViewModel
 
-class ThirdViewModel : ViewModel() {
+class MessageViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }
