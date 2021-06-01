@@ -20,8 +20,9 @@ class CategoryController(private val itemClickListener: ItemClickListener) : Epo
 
     private val _products: CopyOnWriteArrayList<CategoryElement> = CopyOnWriteArrayList()
     private val _categoryModels: CopyOnWriteArrayList<CategoryModel_> = CopyOnWriteArrayList()
-    private val _categoryAndItem: CopyOnWriteArrayList<Pair<String, List<ProductModel_>>> = CopyOnWriteArrayList()
-
+    private val _titles: CopyOnWriteArrayList<CategoryAndItem> = CopyOnWriteArrayList()
+    private val _categoryAndItem: CopyOnWriteArrayList<Pair<String, List<ProductModel_>>> =
+        CopyOnWriteArrayList()
 
     override fun buildModels() {
         if (_categoryModels.isNotEmpty()) {
@@ -36,18 +37,20 @@ class CategoryController(private val itemClickListener: ItemClickListener) : Epo
                 }
             }
         }
+
         if (_categoryAndItem.isNotEmpty()) {
-            _categoryAndItem.forEach { item ->
+            _categoryAndItem.forEachIndexed { index, item ->
                 title {
-                    id(item.first)
+                    id("_title $index")
                     categoryTitle(item.first)
                 }
                 group {
-                    id("group")
+                    id("group_$index")
                     layout(R.layout.component_slider_view_group)
                     carousel {
-                        id("carousel")
+                        id("carousel_$index")
                         models(item.second)
+                        numViewsToShowOnScreen(2.5f)
                         paddingDp(4)
                         hasFixedSize(true)
                     }
@@ -70,18 +73,21 @@ class CategoryController(private val itemClickListener: ItemClickListener) : Epo
     }
 
     fun submitItem(list: ArrayList<CategoryAndItem>) {
-        list.map { item ->
+        _titles.addAll(list)
+        _titles.map { item ->
             _categoryAndItem.add(
                 Pair(
                     first = item.categoryName,
                     second = item.items.map { item2 ->
                         ProductModel_()
+                            .id(item2.id)
                             .image(item2.itemImg)
                             .name(item2.nameKh)
-                            .price(item2.nameKh)
+                            .price("${item2.prices?.get(0)?.price} / ${item2.prices?.get(0)?.uom?.nameKh}")
                     }
                 )
             )
         }
+        requestModelBuild()
     }
 }

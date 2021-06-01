@@ -50,7 +50,7 @@ class ProductItemController(
                 ProductModel_()
                     .id("slider" + item.id)
                     .name(item.nameKh)
-                    .price(item.prices[0].price.toString())
+                    .price(item.prices?.get(0)?.price?.toString())
             }
         )
         requestModelBuild()

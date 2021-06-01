@@ -8,20 +8,20 @@ import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.samnong.app.R
 import com.samnong.app.databinding.ComponentTitleBinding
 
-@EpoxyModelClass(layout = R.layout.component_category_product)
-abstract class TitleModel : EpoxyModelWithHolder<TitleModel.CategoryProductViewHolder>() {
+@EpoxyModelClass(layout = R.layout.component_title)
+abstract class TitleModel : EpoxyModelWithHolder<TitleModel.TitleViewHolder>() {
 
     @field:EpoxyAttribute
     var categoryTitle: String? = null
 
-    override fun bind(holder: CategoryProductViewHolder) {
+    override fun bind(holder: TitleViewHolder) {
         super.bind(holder)
         holder.apply {
-            binding.categoryTextView.text = categoryTitle
+            binding.titleTextView.text = categoryTitle
         }
     }
 
-    class CategoryProductViewHolder : EpoxyHolder() {
+    class TitleViewHolder : EpoxyHolder() {
         lateinit var binding: ComponentTitleBinding
             private set
 

@@ -48,7 +48,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun initAction() {
-        viewModel.getCategory()
+        if(viewModel.product.value?.size?.equals(0) == true) {
+            viewModel.getCategory()
+        }
     }
 
     private fun initObservation() {
@@ -65,7 +67,6 @@ class HomeFragment : Fragment() {
             controller.submitProduct(it)
         })
         viewModel.categoryAndItems.observe(viewLifecycleOwner,  {
-            print("it ${it.size}")
             controller.submitItem(it)
         })
     }

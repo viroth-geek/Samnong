@@ -2,6 +2,7 @@ package com.samnong.app.http
 
 import com.chuckerteam.chucker.api.ChuckerInterceptor
 import com.samnong.app.SamnongApp
+import com.samnong.app.utils.Constant
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,7 +16,7 @@ private val httpClient = OkHttpClient
 private val retrofit = Retrofit
     .Builder()
     .client(httpClient)
-    .baseUrl("http://phsar-samnong.com/api/")
+    .baseUrl(Constant.Url.url)
     .addConverterFactory(GsonConverterFactory.create())
     .build()
 

@@ -30,7 +30,7 @@ data class Item(
     val vdoURL: String? = null,
 
     val ordering: String,
-    val prices: ArrayList<Price>
+    val prices: ArrayList<Price>? = null
 )
 
 data class Price(

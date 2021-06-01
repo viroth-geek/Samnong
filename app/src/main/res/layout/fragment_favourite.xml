@@ -5,10 +5,9 @@
     android:layout_height="match_parent"
     tools:context=".view.favourite.FavouriteFragment">
 
-    <TextView
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Second Fragment" />
+        android:layout_height="match_parent" />
 
 </FrameLayout>

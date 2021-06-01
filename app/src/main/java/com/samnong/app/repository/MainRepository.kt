@@ -16,7 +16,7 @@ class MainRepository(
         }
     }
 
-    suspend fun getItem(id: Int, page: Int = 1, limit: Int = 6) : ResultOf<BaseClass<ArrayList<Item>>> {
+    suspend fun getItem(id: Int, page: Int = 1, limit: Int = 15) : ResultOf<BaseClass<ArrayList<Item>>> {
         return safeApiCall {
             appService!!.getItem(id = id, page = page, limit = limit)
         }
