@@ -65,9 +65,15 @@ class HomeFragment : Fragment() {
         binding.recyclerView.setController(controller)
         viewModel.product.observe(viewLifecycleOwner, {
             controller.submitProduct(it)
+            it.forEachIndexed { index, item ->
+                if(index < 6)
+                    viewModel.getItemByCategoryId(id = item.id, title = item.nameKh)
+            }
         })
+
         viewModel.categoryAndItems.observe(viewLifecycleOwner,  {
             controller.submitItem(it)
         })
+
     }
 }
