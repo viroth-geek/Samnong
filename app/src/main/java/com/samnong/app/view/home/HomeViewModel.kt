@@ -12,36 +12,30 @@ import kotlinx.coroutines.launch
 class HomeViewModel : ViewModel() {
 
     var product: MutableLiveData<ArrayList<CategoryElement>> = MutableLiveData(arrayListOf())
-    val categoryAndItems: MutableLiveData<ArrayList<CategoryAndItem>> = MutableLiveData(arrayListOf())
+    val categoryAndItems: MutableLiveData<ArrayList<CategoryAndItem>> = MutableLiveData()
     private val templeCategoryAndItems: ArrayList<CategoryAndItem> = arrayListOf()
     var loading: MutableLiveData<Boolean> = MutableLiveData()
 
-
     fun getCategory() {
+
         viewModelScope.launch {
             when (val response = SamnongApp.mainRepository.getCategory()) {
                 is ResultOf.Success -> {
                     product.postValue(response.data.data)
-                    response.data.data.forEachIndexed { index, item ->
-                        if (index <= 10) {
-                            getItemByCategoryId(id = item.id, title = item.nameKh)
-                        }
-                    }
                 }
                 is ResultOf.Error -> {
-                    println("error get category ${response.exception}")
+                    println("Error ....")
                 }
             }
         }
     }
 
-    private fun getItemByCategoryId(id: Int, title: String) {
+    fun getItemByCategoryId(id: Int, title: String) {
         viewModelScope.launch {
             when (val response = SamnongApp.mainRepository.getItem(id = id)) {
                 is ResultOf.Success -> {
                     val newItem = CategoryAndItem(categoryName = title, items = response.data.data)
-                    templeCategoryAndItems.add(newItem)
-                    categoryAndItems.postValue(templeCategoryAndItems)
+                    categoryAndItems.postValue(arrayListOf(newItem))
                 }
                 is ResultOf.Error -> {
                     println("error get item ${response.exception}")
