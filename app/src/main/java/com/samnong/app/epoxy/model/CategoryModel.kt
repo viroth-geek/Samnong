@@ -14,10 +14,14 @@ abstract class CategoryModel : EpoxyModelWithHolder<CategoryModel.CategoryViewHo
     @field:EpoxyAttribute
     var name: String? = null
 
+    @field:EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    open var clickListener: View.OnClickListener? = null
+
     override fun bind(holder: CategoryViewHolder) {
         super.bind(holder)
         holder.apply {
             binding.categoryChipView.text = name
+            binding.categoryChipView.setOnClickListener(clickListener)
         }
     }
 

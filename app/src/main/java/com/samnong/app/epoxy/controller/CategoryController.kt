@@ -4,6 +4,7 @@ import android.content.Context
 import com.airbnb.epoxy.AsyncEpoxyController
 import com.airbnb.epoxy.carousel
 import com.airbnb.epoxy.group
+import com.samnong.app.ItemClickListener
 import com.samnong.app.R
 import com.samnong.app.epoxy.model.CategoryModel_
 import com.samnong.app.epoxy.model.title
@@ -12,7 +13,8 @@ import com.samnong.app.view.home.HomeViewModel
 
 class CategoryController(
     var viewModel: HomeViewModel,
-    var context: Context
+    var context: Context,
+    var clickListener: ItemClickListener,
 ) : AsyncEpoxyController() {
 
     override fun buildModels() {
@@ -23,6 +25,9 @@ class CategoryController(
                     CategoryModel_()
                         .id(item.id)
                         .name(item.nameKh)
+                        .clickListener { _, _, _, _ ->
+                            clickListener.onProductCategoryItemClick(item)
+                        }
                 )
             }
 

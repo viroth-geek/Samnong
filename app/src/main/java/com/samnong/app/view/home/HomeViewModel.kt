@@ -29,7 +29,7 @@ class HomeViewModel : ViewModel() {
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = SamnongApp.mainRepository.getCategory()) {
                 is ResultOf.Success -> {
-                    _categories.value = response.data.data
+                    _categories.postValue(response.data.data)
                     controller.requestModelBuild()
                 }
 
