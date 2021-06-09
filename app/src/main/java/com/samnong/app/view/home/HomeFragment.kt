@@ -12,9 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.samnong.app.R
-import com.samnong.app.adapter.HomeAdapter
 import com.samnong.app.databinding.FragmentHomeBinding
-import com.samnong.app.view.message.MessageFragment
+import com.samnong.app.epoxy.controller.CategoryController
 import com.seanghay.statusbar.statusBar
 
 class HomeFragment : Fragment() {
@@ -26,7 +25,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private var contentAdapter : HomeAdapter = HomeAdapter()
+    private lateinit var controller: CategoryController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +43,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        controller = CategoryController(viewModel= viewModel, context = requireContext())
         binding.icMenu.setOnClickListener {
             requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout)
                 .openDrawer(GravityCompat.START)
@@ -51,20 +51,20 @@ class HomeFragment : Fragment() {
         binding.icSearch.setOnClickListener {
             findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
         }
-        binding.recyclerView.adapter = contentAdapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+
+        binding.recyclerView.setController(controller = controller)
         initAction()
         initObservation()
 
     }
 
     private fun initAction() {
-        viewModel.getCategory()
+        viewModel.getCategory(controller)
     }
 
     private fun initObservation() {
-        viewModel.content.observe(viewLifecycleOwner, {
-            contentAdapter.submitList(it)
+        viewModel.categories.observe(viewLifecycleOwner, {
+
         })
     }
 
