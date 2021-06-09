@@ -1,11 +1,14 @@
 package com.samnong.app.epoxy.model
 
+import android.content.Context
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.samnong.app.R
+import com.samnong.app.adapter.ProductItemAdapter
 import com.samnong.app.databinding.ComponentCategoryProductBinding
 import com.samnong.app.epoxy.controller.ProductItemController
 
@@ -13,12 +16,16 @@ import com.samnong.app.epoxy.controller.ProductItemController
 abstract class CategoryProductionModel : EpoxyModelWithHolder<CategoryProductionModel.CategoryProductViewHolder>() {
 
     @field:EpoxyAttribute
-    var itemController: ProductItemController? = null
+    var context: Context? = null
+
+    @field:EpoxyAttribute
+    var itemController: ProductItemAdapter? = null
 
     override fun bind(holder: CategoryProductViewHolder) {
         super.bind(holder)
         holder.apply {
-            binding.recyclerView.setController(itemController!!)
+            binding.recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+            binding.recyclerView.adapter = itemController
         }
     }
 

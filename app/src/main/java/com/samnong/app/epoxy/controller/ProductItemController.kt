@@ -29,7 +29,7 @@ class ProductItemController(
                     layout(R.layout.component_slider_view_group)
                     carousel {
                         id("carousel")
-                        models(_productModel)
+                        models(this@ProductItemController._productModel)
                         paddingDp(4)
                         hasFixedSize(true)
                     }
