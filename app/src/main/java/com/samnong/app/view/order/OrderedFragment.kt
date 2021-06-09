@@ -5,8 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.samnong.app.databinding.FragmentOrderBinding
+import com.samnong.app.view.home.HomeViewModel
 
 class OrderedFragment : Fragment() {
 
@@ -14,7 +16,7 @@ class OrderedFragment : Fragment() {
         fun newInstance() = OrderedFragment()
     }
 
-    private lateinit var viewModel: OrderedViewModel
+    private val homeViewModel: HomeViewModel by activityViewModels()
     private var _binding: FragmentOrderBinding? = null
     private val binding get() = _binding!!
 
@@ -32,8 +34,9 @@ class OrderedFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel = ViewModelProvider(this).get(OrderedViewModel::class.java)
-
+        binding.icBack.setOnClickListener {
+            homeViewModel.showDetail.value = false
+        }
     }
 
 }

@@ -9,7 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.commit
 import com.samnong.app.R
 import com.samnong.app.databinding.FragmentHomeContainerBinding
-import com.samnong.app.view.message.MessageFragment
+import com.samnong.app.view.order.OrderedFragment
 
 class HomeContainerFragment : Fragment() {
 
@@ -28,24 +28,40 @@ class HomeContainerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.showDetail.observe(viewLifecycleOwner, { value ->
-            if (value) {
-                replaceFragmentOfTag("message_fragment") { MessageFragment.newInstance() }
-            } else {
-                replaceFragmentOfTag("home_fragment") { HomeFragment.newInstance() }
-            }
-        })
+
+        val orderFragment = OrderedFragment.newInstance()
+        val homeFragment = HomeFragment.newInstance()
+
+        replaceFragmentOfTag("home_fragment") { homeFragment }
+
     }
 
+
+    private fun <T : Fragment> hideFragmentOfTag(tag: String, factory: () -> T) {
+        val primaryFragment = findFragmentByTagOrElse(tag, factory)
+        childFragmentManager.commit {
+            hide(primaryFragment)
+            addToBackStack(primaryFragment::class.java.name)
+        }
+    }
+
+    private fun <T : Fragment> showFragmentOfTag(tag: String, factory: () -> T) {
+        val primaryFragment = findFragmentByTagOrElse(tag, factory)
+        childFragmentManager.commit {
+            show(primaryFragment)
+            addToBackStack(primaryFragment::class.java.name)
+        }
+    }
 
     private fun <T : Fragment> replaceFragmentOfTag(tag: String, factory: () -> T) {
         val primaryFragment = findFragmentByTagOrElse(tag, factory)
         childFragmentManager.commit {
             setReorderingAllowed(true)
             replace(R.id.fragment_container, primaryFragment, tag)
-            setPrimaryNavigationFragment(primaryFragment)
+            addToBackStack(primaryFragment::class.java.name)
         }
     }
+
 
     @Suppress("UNCHECKED_CAST")
     private fun <T : Fragment> findFragmentByTagOrElse(tag: String, factory: () -> T): T {

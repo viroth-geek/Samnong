@@ -64,5 +64,5 @@
         android:layout_height="match_parent"
         tools:itemCount="20"
         tools:listitem="@layout/component_title" />
-
+    
 </LinearLayout>
