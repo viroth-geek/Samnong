@@ -21,6 +21,8 @@ class HomeViewModel : ViewModel() {
     private val _categories: MutableLiveData<ArrayList<CategoryElement>> = MutableLiveData(ArrayList())
     var categories: LiveData<ArrayList<CategoryElement>> = _categories
 
+    val showDetail: MutableLiveData<Boolean> = MutableLiveData(false)
+
     fun getCategory(controller: CategoryController) {
         if (categories.value?.isNotEmpty() == true) {
             controller.requestModelBuild()
