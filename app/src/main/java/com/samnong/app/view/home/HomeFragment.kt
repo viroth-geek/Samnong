@@ -24,6 +24,8 @@ class HomeFragment : Fragment() {
     }
 
     private val viewModel: HomeViewModel by viewModels()
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private var contentAdapter : HomeAdapter = HomeAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,12 +37,12 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentHomeBinding.inflate(inflater, container, false).apply {
-            initComponent(binding = this)
-        }.root
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
-    private fun initComponent(binding: FragmentHomeBinding) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         binding.icMenu.setOnClickListener {
             requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout)
@@ -53,6 +55,7 @@ class HomeFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         initAction()
         initObservation()
+
     }
 
     private fun initAction() {

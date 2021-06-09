@@ -15,52 +15,7 @@ class HomeViewModel : ViewModel() {
 
     val content: MutableLiveData<ArrayList<CategoryAndItem>> = MutableLiveData(ArrayList())
     private var tempContent: ArrayList<CategoryAndItem> = ArrayList()
-
-//    private val _content = MutableLiveData<List<CategoryAndItem>>()
-//    val content: LiveData<List<CategoryAndItem>> = _content
-
-//    init {
-//        generateContent()
-//    }
-//
-//    private fun generateContent() {
-//
-//        val cards = ArrayList<Item>()
-//        List(10) {
-//            cards.add(
-//                Item(
-//                    id = it.toLong(),
-//                    clientID = 1,
-//                    itemImg = "",
-//                    itemType = "",
-//                    code = "",
-//                    nameCh = "",
-//                    nameEn = "",
-//                    nameKh = "",
-//                    vdoURL = "",
-//                    ordering = "",
-//                    prices = null
-//                )
-//            )
-//        }
-//
-//        _content.value = listOf(
-//            CategoryAndItem.Carousel("100", cards),
-//            CategoryAndItem.Title("1"),
-//            CategoryAndItem.Carousel("101", cards),
-//            CategoryAndItem.Carousel("102", cards),
-//            CategoryAndItem.Carousel("103", cards),
-//            CategoryAndItem.Title("2"),
-//            CategoryAndItem.Carousel("104", cards),
-//            CategoryAndItem.Carousel("106", cards),
-//            CategoryAndItem.Title("3"),
-//            CategoryAndItem.Carousel("108", cards),
-//            CategoryAndItem.Title("4"),
-//            CategoryAndItem.Carousel("109", cards),
-//            CategoryAndItem.Carousel("105", cards),
-//        )
-//    }
-
+    
     fun getCategory() {
         if (content.value?.isNotEmpty() == true) return
         viewModelScope.launch(Dispatchers.IO) {
