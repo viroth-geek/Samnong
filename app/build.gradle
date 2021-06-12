@@ -7,6 +7,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        pro {
+            storeFile file('/Users/viroth/Documents/Test/Samnong/Untitled')
+            storePassword '4WY.4F$FLqQ&<%Dz'
+            keyPassword '4WY.4F$FLqQ&<%Dz'
+            keyAlias 'samnong_alias'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.1"
 

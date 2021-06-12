@@ -10,9 +10,11 @@
         android:name="com.samnong.app.view.home.HomeFragment"
         android:label="fragment_first"
         tools:layout="@layout/fragment_home">
+
         <action
             android:id="@+id/action_firstFragment_to_messageFragment"
-            app:destination="@id/messageFragment" />
+            app:destination="@id/messageFragment"
+            app:enterAnim="@anim/enter_from_right" />
 
     </fragment>
 

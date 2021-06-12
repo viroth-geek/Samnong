@@ -21,11 +21,7 @@ class HomeViewModel : ViewModel() {
     val content : MutableLiveData<List<Content>> = MutableLiveData<List<Content>>()
     private var tempContent: CopyOnWriteArrayList<Content> = CopyOnWriteArrayList()
 
-    init {
-        getCategory()
-    }
-
-    private fun getCategory() {
+    fun getCategory() {
         if (categories.value?.isNotEmpty() == true) {
             content.postValue(tempContent)
             return
@@ -36,8 +32,7 @@ class HomeViewModel : ViewModel() {
                 is ResultOf.Success -> {
                     _categories.postValue(response.data.data)
                     response.data.data.forEachIndexed { index, item ->
-                        if(index < 10) {
-                            println("here $index size ${tempContent.size}")
+                        if(index < 30) {
                             getItemByCategoryId(id = item.id, title = item.nameKh)
                         }
                         else {

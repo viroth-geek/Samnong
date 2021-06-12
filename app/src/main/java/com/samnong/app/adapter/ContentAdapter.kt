@@ -11,6 +11,7 @@ import com.samnong.app.R
 import com.samnong.app.databinding.ComponentBannerBinding
 import com.samnong.app.databinding.ComponentCarouselBinding
 import com.samnong.app.model.Content
+import com.samnong.app.model.Item
 import com.samnong.app.utils.NestedRecyclerViewStateRecoverAdapter
 import com.samnong.app.utils.NestedRecyclerViewViewHolder
 
@@ -19,7 +20,8 @@ private enum class ViewType {
     CAROUSEL,
 }
 
-class ContentAdapter(private val itemClickListener: ItemClickListener? = null) : NestedRecyclerViewStateRecoverAdapter<Content, ContentAdapter.ViewHolder>(ContentAdapterDiffUtil()) {
+class ContentAdapter(private val itemClickListener: ItemClickListener) :
+    NestedRecyclerViewStateRecoverAdapter<Content, ContentAdapter.ViewHolder>(ContentAdapterDiffUtil()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return when (viewType) {
@@ -39,6 +41,7 @@ class ContentAdapter(private val itemClickListener: ItemClickListener? = null) :
                         parent,
                         false
                     ),
+                    itemClickListener = itemClickListener
                 )
 
             else -> throw ClassNotFoundException()
@@ -55,11 +58,7 @@ class ContentAdapter(private val itemClickListener: ItemClickListener? = null) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             ViewType.BANNER.ordinal -> (holder as ViewHolder.BannerViewHolder).bind(getItem(position) as Content.Banner)
-            ViewType.CAROUSEL.ordinal -> (holder as ViewHolder.CarouselViewHolder).bind(
-                getItem(
-                    position
-                ) as Content.Carousel
-            )
+            ViewType.CAROUSEL.ordinal -> (holder as ViewHolder.CarouselViewHolder).bind(getItem(position) as Content.Carousel)
             else -> throw ClassNotFoundException()
         }
         super.onBindViewHolder(holder, position)
@@ -70,7 +69,6 @@ class ContentAdapter(private val itemClickListener: ItemClickListener? = null) :
         class BannerViewHolder(
             private val binding: ComponentBannerBinding,
         ) : ViewHolder(binding.root) {
-
             fun bind(content: Content.Banner) {
                 with(binding) {
                     txtBanner.text = root.context.getString(R.string.banner_text, content.id)
@@ -80,13 +78,16 @@ class ContentAdapter(private val itemClickListener: ItemClickListener? = null) :
 
         class CarouselViewHolder(
             private val binding: ComponentCarouselBinding,
+            private val itemClickListener: ItemClickListener
             ) : ViewHolder(binding.root), NestedRecyclerViewViewHolder {
-
             private lateinit var content: Content.Carousel
-
             init {
                 binding.carousel.apply {
-                    adapter = CarouselAdapter()
+                    adapter = CarouselAdapter(object : ItemClickListener {
+                        override fun itemClick(item: Item) {
+                            itemClickListener.itemClick(item)
+                        }
+                    })
                     layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
                 }
             }

@@ -10,21 +10,21 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.samnong.app.ItemClickListener
 import com.samnong.app.R
 import com.samnong.app.adapter.ContentAdapter
 import com.samnong.app.databinding.FragmentHomeBinding
-import com.samnong.app.view.message.MessageFragment
+import com.samnong.app.model.Item
 import com.seanghay.statusbar.statusBar
 
 class HomeFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = HomeFragment()
-    }
-
     private val viewModel: HomeViewModel by viewModels()
-    private val contentAdapter = ContentAdapter()
-
+    private val contentAdapter = ContentAdapter(object : ItemClickListener {
+        override fun itemClick(item: Item) {
+            findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
+        }
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,16 +37,12 @@ class HomeFragment : Fragment() {
     ): View {
         return FragmentHomeBinding.inflate(inflater, container, false).apply {
             initView(binding = this)
+            initAction()
             initObservation()
         }.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
     private fun initView(binding: FragmentHomeBinding) {
-
         binding.content.adapter = contentAdapter
         binding.icMenu.setOnClickListener {
             requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout)
@@ -57,13 +53,13 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun initAction() {
+        viewModel.getCategory()
+    }
+
     private fun initObservation() {
         viewModel.content.observe(viewLifecycleOwner) {
             contentAdapter.submitList(it)
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
     }
 }

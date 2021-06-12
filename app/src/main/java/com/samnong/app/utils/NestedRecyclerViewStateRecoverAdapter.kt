@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import java.lang.ref.WeakReference
 
-abstract class NestedRecyclerViewStateRecoverAdapter<T, VH : RecyclerView.ViewHolder>(
-    diffUtil: DiffUtil.ItemCallback<T>
-) : ListAdapter<T, VH>(diffUtil) {
+abstract class NestedRecyclerViewStateRecoverAdapter<T, VH : RecyclerView.ViewHolder>(diffUtil: DiffUtil.ItemCallback<T>) : ListAdapter<T, VH>(diffUtil) {
     private val layoutManagerStates = hashMapOf<String, Parcelable?>()
     private val visibleScrollableViews = hashMapOf<Int, ViewHolderRef>()
 
