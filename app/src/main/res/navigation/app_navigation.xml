@@ -3,12 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_navigation"
-    app:startDestination="@id/homeContainerFragment">
-
-    <fragment
-        android:id="@+id/homeContainerFragment"
-        android:name="com.samnong.app.view.home.HomeContainerFragment"
-        tools:layout="@layout/fragment_home_container" />
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/homeFragment"
