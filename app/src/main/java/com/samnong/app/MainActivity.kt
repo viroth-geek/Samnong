@@ -7,10 +7,8 @@ import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.plusAssign
 import androidx.navigation.ui.setupWithNavController
 import com.samnong.app.databinding.ActivityMainBinding
-import com.samnong.app.utils.KeepStateNavigator
 
 class MainActivity : SamnongActivity() {
 
