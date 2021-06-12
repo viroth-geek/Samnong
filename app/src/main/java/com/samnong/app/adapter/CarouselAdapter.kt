@@ -1,14 +1,19 @@
 package com.samnong.app.adapter
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.samnong.app.R
 import com.samnong.app.databinding.ComponentCardBinding
+import com.samnong.app.model.Item
+import com.samnong.app.utils.Constant
 
-class CarouselAdapter : ListAdapter<Int, CarouselAdapter.CardViewHolder>(DiffUtilCarouselItem()) {
+class CarouselAdapter : ListAdapter<Item, CarouselAdapter.CardViewHolder>(DiffUtilCarouselItem()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardViewHolder {
         return CardViewHolder(
             binding = ComponentCardBinding.inflate(
@@ -24,24 +29,21 @@ class CarouselAdapter : ListAdapter<Int, CarouselAdapter.CardViewHolder>(DiffUti
     }
 
     class CardViewHolder(val binding: ComponentCardBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(index: Int) {
-            binding.txtCard.text = index.toString()
-            when (index) {
-                1 -> binding.txtCard.setBackgroundColor(Color.parseColor("#FFF70D"))
-                2 -> binding.txtCard.setBackgroundColor(Color.parseColor("#EBD20C"))
-                3 -> binding.txtCard.setBackgroundColor(Color.parseColor("#FFCC00"))
-                4 -> binding.txtCard.setBackgroundColor(Color.parseColor("#E8AA0C"))
-                5 -> binding.txtCard.setBackgroundColor(Color.parseColor("#FFA70F"))
-                6 -> binding.txtCard.setBackgroundColor(Color.parseColor("#FFA721"))
-                7 -> binding.txtCard.setBackgroundColor(Color.parseColor("#E87B13"))
-                8 -> binding.txtCard.setBackgroundColor(Color.parseColor("#FF6912"))
-                else -> binding.txtCard.setBackgroundColor(Color.parseColor("#FFFFFF"))
-            }
+        @SuppressLint("SetTextI18n")
+        fun bind(item: Item) {
+            binding.productNameTextView.text = item.nameKh
+            binding.productPriceTextview.text = "${item.prices?.get(0)?.price} / ${item.prices?.get(0)?.uom?.nameKh}"
+            Glide
+                .with(binding.imageView)
+                .load("${Constant.Url.imageUlr}/${item.itemImg}")
+                .circleCrop()
+                .placeholder(R.drawable.ic_launcher_background)
+                .into(binding.imageView)
         }
     }
 
-    private class DiffUtilCarouselItem : DiffUtil.ItemCallback<Int>() {
-        override fun areItemsTheSame(oldItem: Int, newItem: Int) = oldItem == newItem
-        override fun areContentsTheSame(oldItem: Int, newItem: Int) = oldItem == newItem
+    private class DiffUtilCarouselItem : DiffUtil.ItemCallback<Item>() {
+        override fun areItemsTheSame(oldItem: Item, newItem: Item) = oldItem.id == newItem.id
+        override fun areContentsTheSame(oldItem: Item, newItem: Item) = oldItem == newItem
     }
 }

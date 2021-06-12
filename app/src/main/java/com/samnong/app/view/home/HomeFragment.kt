@@ -23,7 +23,7 @@ class HomeFragment : Fragment() {
     }
 
     private val viewModel: HomeViewModel by viewModels()
-    private val contentAdapter by lazy { ContentAdapter() }
+    private val contentAdapter = ContentAdapter()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,4 +63,7 @@ class HomeFragment : Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+    }
 }
