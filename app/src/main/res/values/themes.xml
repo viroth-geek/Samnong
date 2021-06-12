@@ -20,16 +20,6 @@
 
     </style>
 
-    <style name="FullScreenDialogStyle" parent="Theme.Samnong">
-        <item name="android:windowFullscreen">false</item>
-        <item name="android:windowBackground">@color/green</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="statusBarForeground">@color/green</item>
-        <item name="android:statusBarColor">@color/green</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:navigationBarColor">@color/white</item>
-    </style>
-
     <style name="Style.App.Toolbar" parent="@style/Widget.MaterialComponents.Toolbar">
         <item name="contentInsetLeft">0dp</item>
         <item name="contentInsetStart">0dp</item>

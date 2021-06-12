@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.samnong.app.ItemClickListener
 import com.samnong.app.R
 import com.samnong.app.databinding.ComponentCardBinding
@@ -45,6 +46,7 @@ class CarouselAdapter(private val itemClickListener: ItemClickListener) :
                 .load("${Constant.Url.imageUlr}/${item.itemImg}")
                 .circleCrop()
                 .placeholder(R.drawable.ic_launcher_background)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
                 .into(binding.imageView)
             binding.root.setOnClickListener {
                 itemClickListener.itemClick(item)

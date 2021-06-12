@@ -1,9 +1,6 @@
 package com.samnong.app.http
 
-import com.samnong.app.model.BaseClass
-import com.samnong.app.model.CategoryElement
-import com.samnong.app.model.Item
-import com.samnong.app.model.PlaceHolder
+import com.samnong.app.model.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -20,6 +17,8 @@ interface AppService {
         @Query("limit") limit: Int
     ): Response<BaseClass<ArrayList<Item>>>
 
-    @GET("posts")
-    suspend fun getPlaceHolder(): Response<ArrayList<PlaceHolder>>
+    @GET("posts/{id}")
+    suspend fun getDetail(
+        @Path("id") id: Int
+    ): Response<BaseClass<Detail>>
 }

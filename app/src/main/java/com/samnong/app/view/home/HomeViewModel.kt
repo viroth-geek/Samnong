@@ -19,7 +19,7 @@ class HomeViewModel : ViewModel() {
 
     val showDetail: MutableLiveData<Boolean> = MutableLiveData(false)
     val content : MutableLiveData<List<Content>> = MutableLiveData<List<Content>>()
-    private var tempContent: CopyOnWriteArrayList<Content> = CopyOnWriteArrayList()
+    private var tempContent: ArrayList<Content> = ArrayList()
 
     fun getCategory() {
         if (categories.value?.isNotEmpty() == true) {
@@ -32,7 +32,7 @@ class HomeViewModel : ViewModel() {
                 is ResultOf.Success -> {
                     _categories.postValue(response.data.data)
                     response.data.data.forEachIndexed { index, item ->
-                        if(index < 30) {
+                        if(index < 15) {
                             getItemByCategoryId(id = item.id, title = item.nameKh)
                         }
                         else {

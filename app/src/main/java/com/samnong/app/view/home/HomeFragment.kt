@@ -22,7 +22,8 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private val contentAdapter = ContentAdapter(object : ItemClickListener {
         override fun itemClick(item: Item) {
-            findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
+            val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(productId = item.id.toInt())
+            findNavController().navigate(action)
         }
     })
 
@@ -47,9 +48,6 @@ class HomeFragment : Fragment() {
         binding.icMenu.setOnClickListener {
             requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout)
                 .openDrawer(GravityCompat.START)
-        }
-        binding.icSearch.setOnClickListener {
-            findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
         }
     }
 

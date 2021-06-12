@@ -22,9 +22,9 @@ class MainRepository(
         }
     }
 
-    suspend fun getPlaceHolder() : ResultOf<ArrayList<PlaceHolder>> {
+    suspend fun getDetail(id: Int): ResultOf<BaseClass<Detail>> {
         return safeApiCall {
-            appService!!.getPlaceHolder()
+            appService!!.getDetail(id = id)
         }
     }
 
