@@ -9,8 +9,6 @@
         android:id="@+id/carousel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:itemCount="20"
-        tools:listitem="@layout/component_product_item" />
+        tools:listitem="@layout/component_card" />
 
 </FrameLayout>

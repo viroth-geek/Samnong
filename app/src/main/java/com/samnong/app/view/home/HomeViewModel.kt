@@ -8,6 +8,7 @@ import com.samnong.app.SamnongApp
 import com.samnong.app.epoxy.controller.CategoryController
 import com.samnong.app.model.CategoryAndItem
 import com.samnong.app.model.CategoryElement
+import com.samnong.app.model.Content
 import com.samnong.app.model.Item
 import com.samnong.app.utils.ResultOf
 import kotlinx.coroutines.Dispatchers
@@ -15,13 +16,37 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel : ViewModel() {
 
-    private val _content: MutableLiveData<ArrayList<CategoryAndItem>> = MutableLiveData(ArrayList())
-    var content: LiveData<ArrayList<CategoryAndItem>> = _content
-
     private val _categories: MutableLiveData<ArrayList<CategoryElement>> = MutableLiveData(ArrayList())
     var categories: LiveData<ArrayList<CategoryElement>> = _categories
 
     val showDetail: MutableLiveData<Boolean> = MutableLiveData(false)
+
+    private val _content = MutableLiveData<List<Content>>()
+    val content : LiveData<List<Content>> = _content
+
+    init {
+        generateContent()
+    }
+
+    private fun generateContent() {
+
+        val cards = listOf(1..8).flatten()
+        _content.value = listOf(
+            Content.Carousel("100", cards),
+            Content.Banner("1"),
+            Content.Carousel("101", cards),
+            Content.Carousel("102", cards),
+            Content.Carousel("103", cards),
+            Content.Banner("2"),
+            Content.Carousel("104", cards),
+            Content.Carousel("106", cards),
+            Content.Banner("3"),
+            Content.Carousel("108", cards),
+            Content.Banner("4"),
+            Content.Carousel("109", cards),
+            Content.Carousel("105", cards),
+        )
+    }
 
     fun getCategory(controller: CategoryController) {
         if (categories.value?.isNotEmpty() == true) {

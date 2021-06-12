@@ -13,7 +13,7 @@ import com.samnong.app.R
 import com.samnong.app.databinding.FragmentMessageBinding
 import kotlinx.coroutines.channels.consumesAll
 
-class MessageFragment : DialogFragment() {
+class MessageFragment : Fragment() {
 
     companion object {
         fun newInstance() = MessageFragment()
@@ -22,15 +22,6 @@ class MessageFragment : DialogFragment() {
     private lateinit var viewModel: MessageViewModel
     private var _binding: FragmentMessageBinding? = null
     private val binding get() = _binding!!
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(
-            STYLE_NORMAL,
-            R.style.FullScreenDialogStyle
-        )
-        (requireActivity() as AppCompatActivity).window
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
