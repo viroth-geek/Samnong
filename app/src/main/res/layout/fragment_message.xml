@@ -6,7 +6,6 @@
     tools:context=".view.message.MessageFragment"
     android:orientation="vertical">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,50 +17,46 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical">
+                android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/icMenu"
-                    style="@style/Style.App.ImageButton"
-                    android:layout_marginStart="12dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:clickable="true"
-                    android:contentDescription="@null"
-                    android:focusable="true"
-                    android:scaleType="center"
-                    android:src="@drawable/ic_menu" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    style="@style/Style.App.ToolbarTitle"
+                    android:id="@+id/icBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:text="@string/app_name" />
-
-                <ImageView
-                    android:id="@+id/icSearch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="12dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:contentDescription="@null"
+                    android:layout_marginStart="12dp"
+                    android:background="?attr/actionBarItemBackground"
                     android:clickable="true"
+                    android:contentDescription="@null"
                     android:focusable="true"
-                    android:scaleType="center"
-                    android:src="@drawable/ic_search" />
+                    android:src="@drawable/ic_back" />
 
             </RelativeLayout>
 
         </com.google.android.material.appbar.MaterialToolbar>
-
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Hello" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Click me" />
+
+    </LinearLayout>
 
 </LinearLayout>
