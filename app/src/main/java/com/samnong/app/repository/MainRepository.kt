@@ -27,6 +27,11 @@ class MainRepository(
             appService!!.getDetail(id = id)
         }
     }
+    suspend fun getRelatedItem(id: Int): ResultOf<BaseClass<ArrayList<Item>>> {
+        return safeApiCall {
+            appService!!.getRelatedItem(id = id)
+        }
+    }
 
     private suspend fun <T : Any> safeApiCall(call: suspend () -> Response<T>): ResultOf<T> {
         return try {

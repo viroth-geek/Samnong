@@ -28,8 +28,7 @@ class HomeFragment : Fragment() {
         object : ItemClickListener {
             override fun onProductClick(item: Item) {
                 super.onProductClick(item)
-                val action =
-                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(productId = item.id.toInt())
+                val action = HomeFragmentDirections.actionHomeFragmentToDetailFragment(productId = item.id.toInt())
                 findNavController().navigate(action)
             }
         })
