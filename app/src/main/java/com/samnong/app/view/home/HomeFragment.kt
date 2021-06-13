@@ -25,13 +25,11 @@ class HomeFragment : Fragment() {
     private val controller by lazy { CategoryController(viewModel = viewModel, requireContext(), object : ItemClickListener {
             override fun onProductCategoryItemClick(categoryElement: CategoryElement) {
                 super.onProductCategoryItemClick(categoryElement)
-                println("Hello $categoryElement")
                 findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
             }
 
             override fun onProductCategoryClick() {
                 super.onProductCategoryClick()
-                println("Hello")
                 findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
             }
         })

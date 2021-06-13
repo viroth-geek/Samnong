@@ -9,13 +9,18 @@ import com.samnong.app.R
 import com.samnong.app.epoxy.model.CategoryModel_
 import com.samnong.app.epoxy.model.title
 import com.samnong.app.epoxy.myCarousel
+import com.samnong.app.model.CategoryElement
 import com.samnong.app.view.home.HomeViewModel
+import java.util.concurrent.CopyOnWriteArrayList
+import java.util.concurrent.CopyOnWriteArraySet
 
 class CategoryController(
-    var viewModel: HomeViewModel,
-    var context: Context,
-    var clickListener: ItemClickListener,
+    private var viewModel: HomeViewModel,
+    private var context: Context,
+    private var clickListener: ItemClickListener,
 ) : AsyncEpoxyController() {
+
+    private val categories: CopyOnWriteArrayList<CategoryElement> = CopyOnWriteArrayList()
 
     override fun buildModels() {
         if (viewModel.categories.value?.isNotEmpty() == true) {
@@ -87,5 +92,10 @@ class CategoryController(
 //                }
 //            }
 //        }
+    }
+
+    fun submitCategory(list: Collection<CategoryElement>) {
+        categories.addAll(list)
+        requestModelBuild()
     }
 }

@@ -18,6 +18,7 @@
         app:chipStartPadding="16dp"
         app:chipSurfaceColor="@color/green"
         app:rippleColor="@color/white"
+        android:fontFamily="@font/krasar_medium"
         tools:text="@tools:sample/full_names" />
 
 </LinearLayout>
