@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.GravityCompat
-import androidx.core.view.isVisible
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -16,7 +15,6 @@ import com.samnong.app.R
 import com.samnong.app.databinding.FragmentHomeBinding
 import com.samnong.app.epoxy.controller.CategoryController
 import com.samnong.app.model.CategoryElement
-import com.samnong.app.view.message.MessageFragment
 import com.seanghay.statusbar.statusBar
 
 class HomeFragment : Fragment() {
@@ -24,10 +22,24 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var controller: CategoryController
+    private val controller by lazy { CategoryController(viewModel = viewModel, requireContext(), object : ItemClickListener {
+            override fun onProductCategoryItemClick(categoryElement: CategoryElement) {
+                super.onProductCategoryItemClick(categoryElement)
+                println("Hello $categoryElement")
+                findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
+            }
+
+            override fun onProductCategoryClick() {
+                super.onProductCategoryClick()
+                println("Hello")
+                findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
+            }
+        })
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        controller.onRestoreInstanceState(savedInstanceState)
         statusBar.light(false).color(Color.TRANSPARENT)
     }
 
@@ -39,21 +51,24 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        controller.onSaveInstanceState(outState)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val navController = findNavController()
-        controller = CategoryController(viewModel= viewModel, context = requireContext(), object : ItemClickListener {
-            override fun onProductCategoryItemClick(categoryElement: CategoryElement) {
-                super.onProductCategoryItemClick(categoryElement)
-//                binding.fragmentContainer.visibility = if (binding.fragmentContainer.isVisible) View.GONE else View.VISIBLE
-                navController.navigate(R.id.action_firstFragment_to_messageFragment)
-            }
-        })
+
+        initComponent()
+    }
+
+    private fun initComponent() {
         binding.icMenu.setOnClickListener {
-            requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout).openDrawer(GravityCompat.START)
+            requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout)
+                .openDrawer(GravityCompat.START)
         }
         binding.icSearch.setOnClickListener {
-
+            findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
         }
 
         binding.recyclerView.setController(controller = controller)
@@ -68,8 +83,13 @@ class HomeFragment : Fragment() {
 
     private fun initObservation() {
         viewModel.categories.observe(viewLifecycleOwner, {
-
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        binding.recyclerView.setDelayMsWhenRemovingAdapterOnDetach(0)
+        binding.recyclerView.adapter = null
     }
 
 }

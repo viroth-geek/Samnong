@@ -2,11 +2,12 @@ package com.samnong.app.epoxy.model
 
 import android.view.View
 import com.airbnb.epoxy.EpoxyAttribute
-import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
+import com.google.android.material.chip.Chip
+import com.google.android.material.textview.MaterialTextView
 import com.samnong.app.R
-import com.samnong.app.databinding.ComponentCategoryBinding
+import com.samnong.app.epoxy.KotlinEpoxyHolder
 
 @EpoxyModelClass(layout = R.layout.component_category)
 abstract class CategoryModel : EpoxyModelWithHolder<CategoryModel.CategoryViewHolder>() {
@@ -17,20 +18,15 @@ abstract class CategoryModel : EpoxyModelWithHolder<CategoryModel.CategoryViewHo
     @field:EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
     open var clickListener: View.OnClickListener? = null
 
+    override fun shouldSaveViewState(): Boolean = true
+
     override fun bind(holder: CategoryViewHolder) {
         super.bind(holder)
-        holder.apply {
-            binding.categoryChipView.text = name
-            binding.categoryChipView.setOnClickListener(clickListener)
-        }
+        holder.titleView.text = name
+        holder.titleView.setOnClickListener(clickListener)
     }
 
-    class CategoryViewHolder : EpoxyHolder() {
-        lateinit var binding: ComponentCategoryBinding
-            private set
-
-        override fun bindView(itemView: View) {
-            binding = ComponentCategoryBinding.bind(itemView)
-        }
+    class CategoryViewHolder : KotlinEpoxyHolder() {
+        val titleView by bind<Chip>(R.id.categoryChipView)
     }
 }

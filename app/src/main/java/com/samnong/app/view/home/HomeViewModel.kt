@@ -25,7 +25,6 @@ class HomeViewModel : ViewModel() {
 
     fun getCategory(controller: CategoryController) {
         if (categories.value?.isNotEmpty() == true) {
-            controller.requestModelBuild()
             return
         }
         viewModelScope.launch(Dispatchers.IO) {

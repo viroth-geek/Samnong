@@ -32,7 +32,7 @@
             app:destination="@id/favouriteFragment" />
     </fragment>
 
-    <dialog
+    <fragment
         android:id="@+id/messageFragment"
         android:name="com.samnong.app.view.message.MessageFragment"
         android:label="fragment_message"
@@ -40,6 +40,6 @@
         <action
             android:id="@+id/action_messageFragment_to_orderFragment"
             app:destination="@id/orderFragment" />
-    </dialog>
+    </fragment>
 
 </navigation>

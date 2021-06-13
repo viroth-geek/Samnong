@@ -19,9 +19,7 @@ class MyCarousel: Carousel {
         defStyle
     )
 
-    override fun isSaveEnabled(): Boolean {
-        return true
-    }
+    override fun isSaveEnabled(): Boolean = true
 
     override fun createLayoutManager(): LayoutManager {
         return LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)

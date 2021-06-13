@@ -21,6 +21,7 @@ abstract class TitleModel : EpoxyModelWithHolder<TitleModel.TitleViewHolder>() {
         }
     }
 
+
     class TitleViewHolder : EpoxyHolder() {
         lateinit var binding: ComponentTitleBinding
             private set
