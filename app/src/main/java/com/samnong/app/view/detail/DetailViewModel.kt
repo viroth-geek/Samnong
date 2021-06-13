@@ -1,5 +1,6 @@
 package com.samnong.app.view.detail
 
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,13 +15,18 @@ import kotlinx.coroutines.launch
 class DetailViewModel : ViewModel() {
 
     val detail: MutableLiveData<Detail> = MutableLiveData()
-    var _detail: LiveData<Detail> = detail
+    var _detail: Detail? = null
+    var context: Context? = null
 
-    fun getDetail(id: Int, controller: DetailController) {
+    fun getDetail(id: Int, controller: DetailController, context: Context) {
+        this.context = context
         viewModelScope.launch(Dispatchers.IO) {
             when (val response = SamnongApp.mainRepository.getDetail(id = id)) {
                 is ResultOf.Success -> {
                     println(response.data.data)
+                    detail.postValue(response.data.data)
+                    _detail = response.data.data
+                    controller.requestModelBuild()
                 }
                 is ResultOf.Error -> {
                     println("Error ${response.exception}")

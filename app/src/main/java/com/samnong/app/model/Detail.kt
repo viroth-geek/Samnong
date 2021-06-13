@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.Serializable
 
 data class Detail(
-    val id: Long,
+    val id: Int,
 
     @SerializedName("item_type")
     val itemType: String,
@@ -78,13 +78,13 @@ data class Mobile(
 
     @SerializedName("deleted_at")
     val deletedAt: String? = null,
-
+    
     val company: Company
 )
 
 @Serializable
 data class Company(
-    val id: Long,
+    val id: Int,
     val name: String,
     val logo: String,
 

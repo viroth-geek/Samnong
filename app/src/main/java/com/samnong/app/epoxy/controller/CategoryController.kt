@@ -31,7 +31,7 @@ class CategoryController(
                 titleModels.add(
                     CategoryModel_()
                         .id("title_$index")
-                        .name(item.categoryName)
+                        .name("${item.categoryName}")
                         .clickListener { _, _, _, _ ->
                             clickListener.onProductCategoryClick()
                         }

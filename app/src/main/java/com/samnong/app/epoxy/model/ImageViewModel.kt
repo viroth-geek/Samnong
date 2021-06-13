@@ -22,7 +22,7 @@ abstract class ImageViewModel : EpoxyModelWithHolder<ImageViewModel.ImageViewHol
         Glide
             .with(holder.binding.imageView)
             .load("${Constant.Url.imageUlr}/$url")
-            .centerCrop()
+            .circleCrop()
             .placeholder(R.drawable.ic_launcher_background)
             .diskCacheStrategy(DiskCacheStrategy.DATA)
             .into(holder.binding.imageView)

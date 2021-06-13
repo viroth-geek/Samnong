@@ -6,9 +6,10 @@ import com.airbnb.epoxy.EpoxyHolder
 import com.airbnb.epoxy.EpoxyModelClass
 import com.airbnb.epoxy.EpoxyModelWithHolder
 import com.samnong.app.R
+import com.samnong.app.databinding.ComponentInformationBinding
 import com.samnong.app.databinding.ComponentTitleBinding
 
-@EpoxyModelClass(layout = R.layout.component_title, useLayoutOverloads = true)
+@EpoxyModelClass(layout = R.layout.component_information, useLayoutOverloads = true)
 abstract class TextViewModel : EpoxyModelWithHolder<TextViewModel.TextViewHolder>() {
 
     @field:EpoxyAttribute
@@ -27,11 +28,11 @@ abstract class TextViewModel : EpoxyModelWithHolder<TextViewModel.TextViewHolder
     }
 
     class TextViewHolder : EpoxyHolder() {
-        lateinit var binding: ComponentTitleBinding
+        lateinit var binding: ComponentInformationBinding
             private set
 
         override fun bindView(itemView: View) {
-            binding = ComponentTitleBinding.bind(itemView)
+            binding = ComponentInformationBinding.bind(itemView)
         }
     }
 

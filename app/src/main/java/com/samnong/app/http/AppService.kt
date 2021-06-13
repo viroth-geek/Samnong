@@ -17,7 +17,7 @@ interface AppService {
         @Query("limit") limit: Int
     ): Response<BaseClass<ArrayList<Item>>>
 
-    @GET("posts/{id}")
+    @GET("products/{id}")
     suspend fun getDetail(
         @Path("id") id: Int
     ): Response<BaseClass<Detail>>
