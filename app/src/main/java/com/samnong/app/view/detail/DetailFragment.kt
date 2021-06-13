@@ -39,7 +39,7 @@ class DetailFragment : Fragment() {
     }
 
     private fun initAction() {
-        viewModel.getDetail()
+
     }
 
     private fun initObservation() {
