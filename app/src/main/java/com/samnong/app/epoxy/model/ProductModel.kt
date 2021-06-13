@@ -22,6 +22,9 @@ abstract class ProductModel : EpoxyModelWithHolder<ProductModel.ProductViewHolde
     @field:EpoxyAttribute
     var price: String? = null
 
+    @field:EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+    open var clickListener: View.OnClickListener? = null
+
     override fun bind(holder: ProductViewHolder) {
         super.bind(holder)
         holder.apply {
@@ -34,6 +37,7 @@ abstract class ProductModel : EpoxyModelWithHolder<ProductModel.ProductViewHolde
                 .into(binding.imageView)
             binding.productNameTextView.text = name
             binding.productPriceTextview.text = price
+            binding.root.setOnClickListener(clickListener)
         }
     }
 

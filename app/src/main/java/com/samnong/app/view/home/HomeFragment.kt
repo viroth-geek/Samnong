@@ -14,7 +14,7 @@ import com.samnong.app.ItemClickListener
 import com.samnong.app.R
 import com.samnong.app.databinding.FragmentHomeBinding
 import com.samnong.app.epoxy.controller.CategoryController
-import com.samnong.app.model.CategoryElement
+import com.samnong.app.model.Item
 import com.seanghay.statusbar.statusBar
 
 class HomeFragment : Fragment() {
@@ -22,15 +22,15 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by activityViewModels()
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val controller by lazy { CategoryController(viewModel = viewModel, requireContext(), object : ItemClickListener {
-            override fun onProductCategoryItemClick(categoryElement: CategoryElement) {
-                super.onProductCategoryItemClick(categoryElement)
-                findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
-            }
-
-            override fun onProductCategoryClick() {
-                super.onProductCategoryClick()
-                findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
+    private val controller by lazy { CategoryController(
+        viewModel = viewModel,
+        requireContext(),
+        object : ItemClickListener {
+            override fun onProductClick(item: Item) {
+                super.onProductClick(item)
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToDetailFragment(productId = item.id.toInt())
+                findNavController().navigate(action)
             }
         })
     }
@@ -64,9 +64,6 @@ class HomeFragment : Fragment() {
         binding.icMenu.setOnClickListener {
             requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout)
                 .openDrawer(GravityCompat.START)
-        }
-        binding.icSearch.setOnClickListener {
-            findNavController().navigate(R.id.action_firstFragment_to_messageFragment)
         }
 
         binding.recyclerView.setController(controller = controller)

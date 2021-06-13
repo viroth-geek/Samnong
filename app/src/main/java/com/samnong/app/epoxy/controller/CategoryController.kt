@@ -1,46 +1,67 @@
 package com.samnong.app.epoxy.controller
 
 import android.content.Context
-import com.airbnb.epoxy.AsyncEpoxyController
+import com.airbnb.epoxy.EpoxyAsyncUtil
+import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.carousel
 import com.airbnb.epoxy.group
 import com.samnong.app.ItemClickListener
 import com.samnong.app.R
 import com.samnong.app.epoxy.model.CategoryModel_
+import com.samnong.app.epoxy.model.ProductModel_
 import com.samnong.app.epoxy.model.title
-import com.samnong.app.epoxy.myCarousel
-import com.samnong.app.model.CategoryElement
 import com.samnong.app.view.home.HomeViewModel
-import java.util.concurrent.CopyOnWriteArrayList
-import java.util.concurrent.CopyOnWriteArraySet
 
 class CategoryController(
     private var viewModel: HomeViewModel,
     private var context: Context,
     private var clickListener: ItemClickListener,
-) : AsyncEpoxyController() {
-
-    private val categories: CopyOnWriteArrayList<CategoryElement> = CopyOnWriteArrayList()
+) : EpoxyController(
+    EpoxyAsyncUtil.getAsyncBackgroundHandler(),
+    EpoxyAsyncUtil.getAsyncBackgroundHandler()
+) {
 
     override fun buildModels() {
-        if (viewModel.categories.value?.isNotEmpty() == true) {
+        if (viewModel.categoriesAndItems.value?.isNotEmpty() == true) {
+
             val titleModels = ArrayList<CategoryModel_>()
-            viewModel.categories.value?.forEach { item ->
+            val itemModels: ArrayList<ProductModel_> = ArrayList()
+
+            viewModel.categoriesAndItems.value?.forEachIndexed { index, item ->
                 titleModels.add(
                     CategoryModel_()
-                        .id(item.id)
-                        .name(item.nameKh)
+                        .id("title_$index")
+                        .name(item.categoryName)
                         .clickListener { _, _, _, _ ->
-                            clickListener.onProductCategoryItemClick(item)
+                            clickListener.onProductCategoryClick()
                         }
                 )
+
+                title {
+                    id("${index}_${item.categoryName}")
+                    categoryTitle(item.categoryName)
+                }
+
+                item.items.forEach { product ->
+                    itemModels.add(
+                        ProductModel_()
+                            .id(product.id)
+                            .image(product.itemImg)
+                            .name(product.nameKh)
+                            .price("${product.prices?.get(0)?.price} $ / ${product.prices?.get(0)?.uom?.nameKh}")
+                            .clickListener { _, _, _, _ ->
+                                clickListener.onProductClick(item = product)
+                            }
+                    )
+
+                }
             }
 
             group {
                 id("group")
                 layout(R.layout.component_slider_view_group)
                 carousel {
-                    id("title_carousel")
+                    id("_carousel")
                     models(titleModels)
                     paddingDp(4)
                     hasFixedSize(true)
@@ -48,9 +69,16 @@ class CategoryController(
                 shouldSaveViewState(true)
             }
 
-            myCarousel {
-                id("my_carouse")
-                models(titleModels)
+            group {
+                id("group_1")
+                layout(R.layout.component_slider_view_group)
+                carousel {
+                    id("_carousel_1")
+                    models(itemModels)
+                    paddingDp(4)
+                    hasFixedSize(true)
+                }
+                shouldSaveViewState(true)
             }
 
         } else {
@@ -59,43 +87,5 @@ class CategoryController(
                 categoryTitle("Loading.....")
             }
         }
-
-//        if (_titles.isNotEmpty()) {
-//            _titles.forEachIndexed { index, item ->
-//
-//                val itemModels: ArrayList<ProductModel_> = ArrayList()
-//                item.items.forEach { item2 ->
-//                    itemModels.add(
-//                        ProductModel_()
-//                            .id(item2.id)
-//                            .image(item2.itemImg)
-//                            .name(item2.nameKh)
-//                            .price("${item2.prices?.get(0)?.price} $ / ${item2.prices?.get(0)?.uom?.nameKh}")
-//                    )
-//                }
-//
-//                title {
-//                    id("$index")
-//                    categoryTitle(item.categoryName)
-//                }
-//
-//                group {
-//                    id("$index")
-//                    layout(R.layout.component_slider_view_group)
-//                    carousel {
-//                        id("$index")
-//                        models(itemModels)
-//                        numViewsToShowOnScreen(2.5f)
-//                        paddingDp(4)
-//                        hasFixedSize(true)
-//                    }
-//                }
-//            }
-//        }
-    }
-
-    fun submitCategory(list: Collection<CategoryElement>) {
-        categories.addAll(list)
-        requestModelBuild()
     }
 }

@@ -11,8 +11,13 @@
         android:label="fragment_first"
         tools:layout="@layout/fragment_home">
         <action
-            android:id="@+id/action_firstFragment_to_messageFragment"
-            app:destination="@id/messageFragment" />
+            android:id="@+id/action_homeFragment_to_detailFragment"
+            app:destination="@id/detailFragment">
+            <argument
+                android:name="productId"
+                android:defaultValue="0"
+                app:argType="integer" />
+        </action>
 
     </fragment>
 
@@ -36,10 +41,23 @@
         android:id="@+id/messageFragment"
         android:name="com.samnong.app.view.message.MessageFragment"
         android:label="fragment_message"
-        tools:layout="@layout/fragment_message" >
+        tools:layout="@layout/fragment_message">
         <action
             android:id="@+id/action_messageFragment_to_orderFragment"
             app:destination="@id/orderFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.samnong.app.view.detail.DetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail">
+
+        <argument
+            android:name="productId"
+            android:defaultValue="0"
+            app:argType="integer" />
+
     </fragment>
 
 </navigation>
