@@ -3,6 +3,7 @@ package com.samnong.app
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.epoxy.Carousel
