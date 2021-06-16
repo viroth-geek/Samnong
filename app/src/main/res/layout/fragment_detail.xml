@@ -25,11 +25,19 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginStart="12dp"
-                    android:background="?attr/actionBarItemBackground"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:clickable="true"
                     android:contentDescription="@null"
                     android:focusable="true"
+                    style="@style/Style.App.ImageButton"
                     android:src="@drawable/ic_back" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/Style.App.ToolbarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:text="@string/detail"/>
 
             </RelativeLayout>
 
