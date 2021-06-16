@@ -32,6 +32,7 @@
                     style="@style/Style.App.ImageButton"
                     android:src="@drawable/ic_back" />
 
+
                 <com.google.android.material.textview.MaterialTextView
                     style="@style/Style.App.ToolbarTitle"
                     android:layout_width="wrap_content"
