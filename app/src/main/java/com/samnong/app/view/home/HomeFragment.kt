@@ -55,14 +55,12 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         initComponent()
     }
 
     private fun initComponent() {
         binding.icMenu.setOnClickListener {
-            requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout)
-                .openDrawer(GravityCompat.START)
+            requireActivity().findViewById<DrawerLayout>(R.id.drawerLayout).openDrawer(GravityCompat.START)
         }
 
         binding.recyclerView.setController(controller = controller)
@@ -84,6 +82,7 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         binding.recyclerView.setDelayMsWhenRemovingAdapterOnDetach(0)
         binding.recyclerView.adapter = null
+
     }
 
 }

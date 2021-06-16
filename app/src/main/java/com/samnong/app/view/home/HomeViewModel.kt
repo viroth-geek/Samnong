@@ -34,14 +34,15 @@ class HomeViewModel : ViewModel() {
                 is ResultOf.Success -> {
                     _categories.postValue(response.data.data)
                     response.data.data.forEachIndexed { index, item ->
-                        if (index < 2)
+                        if (index < 1)
                             getItemByCategoryId(
                                 id = item.id,
                                 title = item.nameKh,
                                 controller = controller
                             )
-                        else
+                        else{
                             return@forEachIndexed
+                        }
                     }
                 }
 
