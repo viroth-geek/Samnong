@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.samnong.app.ItemClickListener
 import com.samnong.app.databinding.FragmentDetailBinding
 import com.samnong.app.epoxy.controller.DetailController
+import com.samnong.app.model.Item
 import com.seanghay.statusbar.statusBar
 
 class DetailFragment : Fragment() {
@@ -21,6 +23,11 @@ class DetailFragment : Fragment() {
     private val controller by lazy {
         DetailController(
             viewModel = viewModel,
+            object : ItemClickListener {
+                override fun onProductClick(item: Item) {
+                    super.onProductClick(item)
+                }
+            }
         )
     }
 

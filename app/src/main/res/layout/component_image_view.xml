@@ -16,6 +16,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:scaleType="centerCrop"
+        android:background="@drawable/circle_shape"
+        android:padding="2dp"
         tools:src="@tools:sample/avatars"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

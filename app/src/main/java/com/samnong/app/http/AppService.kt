@@ -17,6 +17,11 @@ interface AppService {
         @Query("limit") limit: Int
     ): Response<BaseClass<ArrayList<Item>>>
 
+    @GET("products/{id}/related")
+    suspend fun getRelatedItem(
+        @Path("id") id: Int,
+    ): Response<BaseClass<ArrayList<Item>>>
+
     @GET("products/{id}")
     suspend fun getDetail(
         @Path("id") id: Int

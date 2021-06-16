@@ -40,8 +40,9 @@ class HomeViewModel : ViewModel() {
                                 title = item.nameKh,
                                 controller = controller
                             )
-                        else
+                        else{
                             return@forEachIndexed
+                        }
                     }
                 }
 

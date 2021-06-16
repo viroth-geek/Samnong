@@ -14,4 +14,7 @@
     <string name="home">ទំព័រដើម</string>
     <string name="see_all">មើលទាំងអស់</string>
     <string name="gallery">វិចិត្រសាល</string>
+    <string name="prices">តារាងតំលៃ</string>
+    <string name="price">តំលៃ</string>
+    <string name="contact_number">លេខទំនាក់ទំនង</string>
 </resources>
