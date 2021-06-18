@@ -26,6 +26,7 @@ class MainActivity : SamnongActivity() {
         val navController = navHostFragment.navController
 
         binding.navView.setupWithNavController(navController = navController)
+        binding.drawerLayout.drawerElevation = 0f
         binding.drawerLayout.addDrawerListener(object : ActionBarDrawerToggle(this, binding.drawerLayout, R.string.open, R.string.close) {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 super.onDrawerSlide(drawerView, slideOffset)
